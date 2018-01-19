@@ -25,8 +25,15 @@ public class NoticeController {
 	private NoticeSerivce noticeSerivce;
 	
 	@RequestMapping(value="noticeView")
-	public ModelAndView selectOne(int num, Model model, HttpSession session) throws Exception{
-		return noticeSerivce.selectOne(num); 
+	public ModelAndView selectOne(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		BoardDTO boardDTO=noticeSerivce.selectOne(num);
+		
+		mv.addObject("view", boardDTO);
+		mv.addObject("board", "notice");
+		mv.setViewName("board/boardView");
+		return mv; 
 		
 	}
 	

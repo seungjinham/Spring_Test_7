@@ -17,7 +17,7 @@
 	<h3>HIT : ${view.hit}</h3>	
 	
 	<!-- 첨부파일 a 태그 사용 -->
-	<c:forEach items="${fileList}" var="file" >
+	<c:forEach items="${view.files}" var="file" >
 		<a href="../resources/upload/${file.fname}">${file.oname}</a>
 	</c:forEach>
 	
