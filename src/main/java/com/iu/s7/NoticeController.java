@@ -1,6 +1,5 @@
 package com.iu.s7;
 
-import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.iu.board.BoardDTO;
 import com.iu.notice.NoticeDTO;
 import com.iu.notice.NoticeSerivce;
-import com.iu.util.FileSaver;
 import com.iu.util.ListData;
 
 @Controller
@@ -50,23 +48,8 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="noticeWrite", method=RequestMethod.POST)
-	public String insert(NoticeDTO noticeDTO, RedirectAttributes re,MultipartFile f[], HttpSession session) throws Exception{
-		//Service class로 session, file들을 넘겨줌
-		String filePath=session.getServletContext().getRealPath("resources/upload");
-		File file = new File(filePath);
-		
-		if(!file.exists()){
-			file.mkdirs();
-		}
-		
-		FileSaver fs = new FileSaver();
-		
-		for(MultipartFile f1:f){
-			String s=fs.save1(f1, filePath);
-			System.out.println(s);
-		}
-		
-		int result=noticeSerivce.insert(noticeDTO);
+	public String insert(NoticeDTO noticeDTO, RedirectAttributes re,MultipartFile file[], HttpSession session) throws Exception{
+		int result=noticeSerivce.insert(noticeDTO, file, session);
 		String message="Write Fail";
 		if(result>0){
 			message="Write Success";

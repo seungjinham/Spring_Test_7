@@ -56,11 +56,10 @@
 		<p><input type="button" value="FileAdd" id="btn"></p>
 		<div id="result">
 		</div>	
-			<div id="ex">
-				<input type="file" name="file"><span class="remove">X</span><br>
-			</div>
-		
 		<button>Write</button>
 	</form>
+	<div id="ex">
+		<input type="file" name="file"><span class="remove">X</span><br>
+	</div>
 </body>
 </html>
