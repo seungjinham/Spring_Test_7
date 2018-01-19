@@ -4,24 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
   <mapper namespace="QnaMapper">
-  
-  	<resultMap type="QnaDTO" id="QnaResult">
-  			<id property="num" column="num"/>
-  			<result property="writer" column="writer"/>
-  			<result property="title" column="title"/>
-  			<result property="contents" column="contents"/>
-  			<result property="reg_date" column="reg_date"/>
-  			<result property="hit" column="hit"/>
-  			<result property="ref" column="ref"/>
-  			<result property="step" column="step"/>
-  			<result property="depth" column="depth"/>
-  			<collection property="files" ofType="FileDTO" javaType="ArrayList">
-  				<id property="fnum" column="fnum"/>
-  				<result property="num" column="num"/>
-  				<result property="fname" column="fname"/>
-  				<result property="oname" column="oname"/>  			
-  			</collection>  		
-  		</resultMap>
+
+	<resultMap type="QnaDTO" id="QnaResult">
+		<id property="num" column="num" />
+		<result property="writer" column="writer" />
+		<result property="title" column="title" />
+		<result property="contents" column="contents" />
+		<result property="reg_date" column="reg_date" />
+		<result property="hit" column="hit" />
+		<result property="ref" column="ref" />
+		<result property="step" column="step" />
+		<result property="depth" column="depth" />
+		<collection property="files" ofType="FileDTO" javaType="ArrayList">
+			<id property="fnum" column="fnum" />
+			<result property="num" column="num" />
+			<result property="fname" column="fname" />
+			<result property="oname" column="oname" />
+		</collection>
+	</resultMap>
   
   	<select id="totalCount" resultType="int" parameterType="listData">
   		select nvl(count(num),0) from qna
