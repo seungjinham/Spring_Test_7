@@ -1,7 +1,6 @@
 package com.iu.qna;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;

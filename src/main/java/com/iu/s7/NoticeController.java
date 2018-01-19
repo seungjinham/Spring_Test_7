@@ -25,7 +25,8 @@ public class NoticeController {
 	private NoticeSerivce noticeSerivce;
 	
 	@RequestMapping(value="noticeView")
-	public void selectOne(int num) throws Exception{
+	public ModelAndView selectOne(int num, Model model, HttpSession session) throws Exception{
+		return noticeSerivce.selectOne(num); 
 		
 	}
 	
