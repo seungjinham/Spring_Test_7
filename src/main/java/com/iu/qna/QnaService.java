@@ -42,8 +42,7 @@ public class QnaService implements BoardService {
 
 	@Override
 	public int insert(BoardDTO boardDTO, MultipartFile [] file, HttpSession session) throws Exception {
-		int num=qnaDAO.num();
-		boardDTO.setNum(num);
+		
 		qnaDAO.insert(boardDTO);
 		
 		FileSaver fs = new FileSaver();
@@ -60,12 +59,12 @@ public class QnaService implements BoardService {
 			FileDTO fileDTO = new FileDTO();
 			fileDTO.setFname(names.get(i));
 			fileDTO.setOname(file[i].getOriginalFilename());
-			fileDTO.setNum(num);
+			fileDTO.setNum(boardDTO.getNum());
 			
 			fileDAO.insert(fileDTO);			
 		}
 		
-		return qnaDAO.insert(boardDTO);
+		return 1;
 	}
 
 	@Override

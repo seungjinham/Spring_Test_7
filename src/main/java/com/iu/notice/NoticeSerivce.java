@@ -41,8 +41,8 @@ public class NoticeSerivce implements BoardService {
 
 	@Override
 	public int insert(BoardDTO boardDTO, MultipartFile [] file, HttpSession session) throws Exception {
-		int num=noticeDAO.num();
-		boardDTO.setNum(num);
+		
+		//mybatis에서 쿼리를 실행하기 전 num값을 먼저 넣어놓고 그 다음에 쿼리를 실행
 		noticeDAO.insert(boardDTO);
 		
 		FileSaver fileSaver = new FileSaver();
@@ -59,7 +59,7 @@ public class NoticeSerivce implements BoardService {
 			FileDTO fileDTO = new FileDTO();
 			fileDTO.setFname(names.get(i));
 			fileDTO.setOname(file[i].getOriginalFilename());
-			fileDTO.setNum(num);
+			fileDTO.setNum(boardDTO.getNum());
 			
 			fileDAO.insert(fileDTO);			
 		}

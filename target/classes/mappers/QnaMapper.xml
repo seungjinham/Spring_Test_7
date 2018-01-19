@@ -19,6 +19,9 @@
   	</select>  
   
 	<insert id="insert" parameterType="QnaDTO">
+		<selectKey resultType="int" order="BEFORE" keyProperty="num">
+			select board_seq.nextval from dual
+		</selectKey>
 		insert into qna values(#{num},#{title},#{contents},#{writer},0,sysdate,#{num},0,0)
 	</insert>
 	
@@ -29,10 +32,6 @@
 	<delete id="delete" parameterType="int">
 		delete qna where num=#{num}
 	</delete>
-	
-	<select id="num" resultType="int">
-  		select board_seq.nextval from dual
-  	</select>
 
   	<select id="selectOne" parameterType="int" resultType="QnaDTO">
   		select * from qna where num=#{num}
@@ -56,7 +55,7 @@
   	</select>
   	
   	<insert id="replyInsert" parameterType="Map" >
-  		insert into qna values(qna_seq.nextval,#{qna.title},#{qna.contents},#{qna.writer},0,sysdate,#{parent.ref},#{parent.step}+1,#{parent.depth}+1)
+  		insert into qna values(board_seq.nextval,#{qna.title},#{qna.contents},#{qna.writer},0,sysdate,#{parent.ref},#{parent.step}+1,#{parent.depth}+1)
   	</insert>
   	
   	<update id="replyUpdate" parameterType="QnaDTO">
