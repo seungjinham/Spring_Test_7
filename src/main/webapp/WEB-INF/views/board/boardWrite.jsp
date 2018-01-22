@@ -48,7 +48,7 @@
 </style>
 </head>
 <body>
-	<h1>${board}</h1>
+	<h1>${board} Write</h1>
 	<form action="./${board}Write" method="post" enctype="multipart/form-data">
 		<p>Title : <input type="text" name="title"></p>
 		<p>Writer : <input type="text" name="writer"></p>

@@ -67,13 +67,26 @@ public class QnaService implements BoardService {
 	}
 
 	@Override
-	public int update(BoardDTO boardDTO) throws Exception {
+	public int update(BoardDTO boardDTO, MultipartFile [] file, HttpSession session) throws Exception {
 		return qnaDAO.update(boardDTO);
 	}
 
 	@Override
-	public int delete(int num) throws Exception {
-		return qnaDAO.delete(num);
+	public int delete(int num, HttpSession session) throws Exception {
+		String filePath = session.getServletContext().getRealPath("resources/upload");
+		List<FileDTO> ar = fileDAO.selectList(num);		
+		int result = qnaDAO.delete(num); 
+		result = fileDAO.delete(num);
+		
+		for(FileDTO fileDTO : ar){
+			try {
+				File file = new File(filePath, fileDTO.getFname());
+				file.delete();				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 		
 	public int replyInsert(BoardDTO boardDTO) throws Exception{

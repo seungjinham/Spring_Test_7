@@ -24,6 +24,30 @@ public class NoticeController {
 	@Inject
 	private NoticeSerivce noticeSerivce;
 	
+	@RequestMapping(value="noticeUpdate", method=RequestMethod.GET)
+	public ModelAndView update(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		BoardDTO boardDTO=noticeSerivce.selectOne(num);
+		
+		mv.addObject("view", boardDTO);
+		mv.addObject("board", "notice");
+		mv.setViewName("board/boardUpdate");
+		return mv; 
+	}
+	
+	@RequestMapping(value="noticeUpdate", method=RequestMethod.POST)
+	public String update(NoticeDTO noticeDTO, MultipartFile file[], HttpSession session) throws Exception{
+		int result=noticeSerivce.update(noticeDTO,file, session);
+		return "redirect:./noticeList";
+	}
+	
+	@RequestMapping(value="noticeDelete", method=RequestMethod.GET)
+	public String delete(Model model,int num, HttpSession session) throws Exception{
+		noticeSerivce.delete(num,session);
+		return "redirect:./noticeList";
+	}	
+	
 	@RequestMapping(value="noticeView")
 	public ModelAndView selectOne(int num) throws Exception{
 		ModelAndView mv = new ModelAndView();

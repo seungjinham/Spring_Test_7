@@ -25,6 +25,27 @@ public class QnaController {
 	@Inject
 	private QnaService qnaService;
 	
+	@RequestMapping(value="qnaUpdate", method=RequestMethod.GET)
+	public String update(Model model, int num) throws Exception{
+		BoardDTO boardDTO=qnaService.selectOne(num);
+		model.addAttribute("view", boardDTO);
+		model.addAttribute("board", "qna");
+		return "board/boardUpdate";
+	}
+	
+	@RequestMapping(value="qnaUpdate", method=RequestMethod.POST)
+	public String update(QnaDTO qnaDTO, MultipartFile file[], HttpSession session) throws Exception{
+		int result=qnaService.update(qnaDTO,file,session);
+		
+		return "redirect:./qnaList";
+	}
+	
+	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)
+	public String delete(Model model,int num, HttpSession session) throws Exception{
+		qnaService.delete(num, session);
+		return "redirect:./qnaList";
+	}	
+	
 	@RequestMapping(value="qnaView")
 	public ModelAndView selectOne(int num) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -68,5 +89,4 @@ public class QnaController {
 		re.addFlashAttribute("message", message);
 		return "redirect:./qnaList";
 	}
-
 }
