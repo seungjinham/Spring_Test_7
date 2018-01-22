@@ -27,6 +27,7 @@
 						id:fname
 					},
 					success:function(data){
+						alert(data.trim()==1);
 						if(data.trim()==1){
 							$(del).prev().remove();
 							$(del).remove();
