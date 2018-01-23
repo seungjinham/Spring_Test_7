@@ -24,10 +24,9 @@
 					type:"GET",
 					data:{
 						fnum:fnum,
-						id:fname
+						fname:fname
 					},
 					success:function(data){
-						alert(data.trim()==1);
 						if(data.trim()==1){
 							$(del).prev().remove();
 							$(del).remove();
@@ -40,19 +39,10 @@
 		});
 		
 		var i=${fn:length(view.files)};
-	 	/*$("#btn").click(function() {
-			if(i<5){
-				$("#result").append('<input type="file" name="file'+i+'"><span class="remove">X</span><br>');
-				i++;
-			}else{
-				alert("최대 5개만 가능합니다");
-			}
-		}); */
 
 		$("#btn").click(function() {
 			if(i<5){
-				var ex=$("#ex").html();
-				$("#result").append(ex);
+				$("#result").append('<p><input type="file" name="file"><span class="remove">X</span></p>');
 				i++;
 			}else{
 				alert("최대 5개만 가능합니다");
@@ -88,16 +78,14 @@
 		<p>contents : <textarea rows="" cols="" name="contents" >${view.contents}</textarea></p>
 		<p><input type="button" value="FileAdd" id="btn"></p>
 
+
 		<div id="result">
 			<c:forEach items="${view.files}" var="file">
-				<input type="text" value="${file.oname}" readonly="readonly"><span class="del" title="${file.fnum}" id="${file.fname}">X</span>
+				<input type="text" value="${file.oname}" readonly="readonly">
+				<span class="del" title="${file.fnum}" id="${file.fname}">X</span>
 			</c:forEach>
 		</div>
-
 		<input type="submit" value="Update">
 	</form>
-	<div id="ex">
-		<p><input type="file" name="file"><span class="remove">X</span></p>
-	</div>
 </body>
 </html>

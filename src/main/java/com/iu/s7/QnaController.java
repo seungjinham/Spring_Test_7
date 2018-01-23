@@ -26,16 +26,20 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	@RequestMapping(value="qnaUpdate", method=RequestMethod.GET)
-	public String update(Model model, int num) throws Exception{
+	public ModelAndView update(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
 		BoardDTO boardDTO=qnaService.selectOne(num);
-		model.addAttribute("view", boardDTO);
-		model.addAttribute("board", "qna");
-		return "board/boardUpdate";
+		
+		mv.addObject("view", boardDTO);
+		mv.addObject("board", "qna");
+		mv.setViewName("board/boardUpdate");
+		return mv;
 	}
 	
 	@RequestMapping(value="qnaUpdate", method=RequestMethod.POST)
 	public String update(QnaDTO qnaDTO, MultipartFile file[], HttpSession session) throws Exception{
-		int result=qnaService.update(qnaDTO,file,session);
+		qnaService.update(qnaDTO,file,session);
 		
 		return "redirect:./qnaList";
 	}

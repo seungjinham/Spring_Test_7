@@ -54,17 +54,17 @@ public class NoticeSerivce implements BoardService {
 		}
 		
 		List<String> names=fileSaver.saver(file, filePath);
-		
+		int result=0;
 		for(int i=0; i<names.size(); i++){
 			FileDTO fileDTO = new FileDTO();
 			fileDTO.setFname(names.get(i));
 			fileDTO.setOname(file[i].getOriginalFilename());
 			fileDTO.setNum(boardDTO.getNum());
 			
-			fileDAO.insert(fileDTO);			
+			result=fileDAO.insert(fileDTO);			
 		}
 
-		return 1;
+		return result;
 	}
 
 	@Override
@@ -82,6 +82,7 @@ public class NoticeSerivce implements BoardService {
 		}
 		
 		List<String> names=fileSaver.saver(file, filePath);
+		int result=0;
 		
 		for(int i=0; i<names.size(); i++){
 			FileDTO fileDTO = new FileDTO();
@@ -89,9 +90,9 @@ public class NoticeSerivce implements BoardService {
 			fileDTO.setOname(file[i].getOriginalFilename());
 			fileDTO.setNum(boardDTO.getNum());
 			
-			fileDAO.insert(fileDTO);			
+			result=fileDAO.insert(fileDTO);			
 		}		
-		return 1;
+		return result;
 	}
 
 	@Override

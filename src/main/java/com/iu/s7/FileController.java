@@ -24,7 +24,7 @@ public class FileController {
 		String filePath=session.getServletContext().getRealPath("resources/upload");
 		
 		int result=fileDAO.deleteFnum(fileDTO.getFnum());
-		System.out.println(fileDTO.getFnum());
+		
 		if(result>0){
 			File file = new File(filePath, fileDTO.getFname());
 			
@@ -34,7 +34,6 @@ public class FileController {
 				result=0;
 			}			
 		}
-		System.out.println(result);
 		model.addAttribute("result", result);
 		return "common/fileResult";
 	}
