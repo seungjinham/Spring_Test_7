@@ -11,24 +11,28 @@ public class MemberDAO {
 	private SqlSession session;
 	private final String NAMESPACE="MemberMapper.";
 	
+	public MemberDTO memberIdCheck(String id) throws Exception {
+		return session.selectOne(NAMESPACE+"memberIdCheck", id);
+	}
+	
 	//========== Join ==========
-	public int insert(MemberDTO memberDTO) throws Exception{
-		return session.insert(NAMESPACE+"insert", memberDTO);
+	public int memberJoin(MemberDTO memberDTO) throws Exception{
+		return session.insert(NAMESPACE+"memberJoin", memberDTO);
 	}
 
 	//========== Login, View ==========
-	public MemberDTO selectOne(MemberDTO memberDTO) throws Exception{
-		return session.selectOne(NAMESPACE+"selectOne", memberDTO);
+	public MemberDTO memberLogin(MemberDTO memberDTO) throws Exception{
+		return session.selectOne(NAMESPACE+"memberLogin", memberDTO);
 	}
 
 	//========== update ==========
-	public int update(MemberDTO memberDTO) throws Exception{
-		return session.update(NAMESPACE+"update", memberDTO);
+	public int memberUpdate(MemberDTO memberDTO) throws Exception{
+		return session.update(NAMESPACE+"memberUpdate", memberDTO);
 	}
 
 	//========== delete ==========
-	public int delete(String id) throws Exception{
-		return session.delete(NAMESPACE+"delete", id);
+	public int memberDelete(MemberDTO memberDTO) throws Exception{
+		return session.delete(NAMESPACE+"memberDelete", memberDTO);
 	}
 
 }

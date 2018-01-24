@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>MyPage</h1>
+	<img alt="" src="../resources/upload/${member.fname}" width="200px" height="200px">
 	<h3>ID : ${member.id}</h3>
 	<h3>PW : ${member.pw}</h3>
 	<h3>NAME : ${member.name}</h3>
@@ -15,9 +16,8 @@
 	<h3>PHONE : ${member.phone}</h3>
 	<h3>AGE : ${member.age}</h3>
 	<h3>JOB : ${member.job}</h3>
-	<img alt="" src="../resources/upload/${member.fname}">
 	
-	<a href="memberUpdate">Update</a>
-	<a href="memberDelete">Delete</a>
+	<a href="memberUpdate">수정</a>
+	<a href="memberDelete">탈퇴</a>
 </body>
 </html>

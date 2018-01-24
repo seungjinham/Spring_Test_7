@@ -2,6 +2,13 @@
 <html>
 <head>
 	<title>Home</title>
+<script type="text/javascript">
+	var message = '${message}';
+	if(message !=''){
+		alset(message);
+	}
+
+</script>
 </head>
 <body>
 <h1>
