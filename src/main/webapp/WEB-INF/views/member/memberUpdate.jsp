@@ -9,17 +9,35 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function() {
-		$("#remove").click(function() {
+	/* 	$("#remove").click(function() {
 			$(this).remove();
 			$("#result").append('<p><input type="file" name="file"></p>');
-		});			
+		});		 */	
+		
+		
+		$("#del").click(function() {
+			var id=$(this).attr("title");
+			$("#"+id).html('Photo : <input type="file" name="file" id="f">');			
+		});
+		
+		$("#btn").click(function() {
+			var f=$("#f").val();
+			if(f !=''){
+				alert("ok");
+				$("#frm").submit();
+			};
+		});
+		
+		
 	});
 	
 </script>
 </head>
 <body>
 	<h1>MyPage Update</h1>
-	<form action="memberUpdate" method="post" enctype="multipart/form-data">
+	<form id="frm" action="memberUpdate" method="post" enctype="multipart/form-data">
+		
+	<%-- 	
 		<c:if test="${empty member.fname}">
 			<input type="file" name="file">
 		</c:if>
@@ -28,11 +46,14 @@
 			<img src="../resources/upload/${member.fname}" width="200px" height="200px">
 			<input type="hidden" name="oname" value="${member.oname}">
 			<input type="hidden" name="fname" value="${member.fname}">
-			<div id="result">
-				<span id="remove">${member.oname} X</span>
+			<div id="result">				
+				<span id="remove">${member.oname} X</span>				
 			</div>
 			
 		</c:if>
+		
+		 --%>
+		
 
 		<input type="hidden" name="id" value="${member.id}">
 		<p>PW : <input type="password" name="pw" value="${member.pw}"></p>
@@ -50,7 +71,8 @@
 				<input type="radio" name="job" value="T" checked="checked">T
 			</c:if>	
 		</p>
-		<button>수정</button>
+		<p id="photo">Photo : <span id="del" title="photo">${member.oname} X</span></p>
+		<input type="button" value="Update" id="btn">
 	</form>
 </body>
 </html>

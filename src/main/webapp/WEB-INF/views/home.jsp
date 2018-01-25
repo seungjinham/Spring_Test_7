@@ -25,8 +25,8 @@
 		<a href="./member/memberLogout">Logout</a>
 		<a href="./member/memberView">MyPage</a>
 		<hr>
-		<a href="./notice/noticeList">Notice</a>
-		<a href="./qna/qnaList">Qna</a>
 	</c:if>
+	<a href="./notice/noticeList">Notice</a>
+	<a href="./qna/qnaList">Qna</a>
 </body>
 </html>

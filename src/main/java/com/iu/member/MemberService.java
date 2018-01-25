@@ -47,22 +47,27 @@ public class MemberService {
 	//========== update ==========
 	public int memberUpdate(MemberDTO memberDTO,HttpSession session, MultipartFile file) throws Exception{
 
-		String filePath = session.getServletContext().getRealPath("resources/upload");
+		if(file != null){
+			String filePath = session.getServletContext().getRealPath("resources/upload");
 
-		File f = new File(filePath);
-		if(!f.exists()){
-			f.mkdirs();
+			File f = new File(filePath);
+			if(!f.exists()){
+				f.mkdirs();
+			}
+
+			FileSaver fileSaver = new FileSaver();
+			String fileName=fileSaver.saver(file, filePath);
+
+			memberDTO.setFname(fileName);
+			memberDTO.setOname(file.getOriginalFilename());
+		}else{
+			MemberDTO memberDTO2 = (MemberDTO)session.getAttribute("member");
+			memberDTO.setFname(memberDTO2.getFname());
+			memberDTO.setOname(memberDTO2.getOname());
 		}
 
-		FileSaver fileSaver = new FileSaver();
-		String name=fileSaver.saver(file, filePath);
+		return memberDAO.memberUpdate(memberDTO);
 
-		memberDTO.setFname(name);
-
-
-		int result = memberDAO.memberUpdate(memberDTO);
-
-		return result;
 	}
 
 	//========== delete ==========

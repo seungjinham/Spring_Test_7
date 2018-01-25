@@ -111,23 +111,21 @@ public class MemberController {
 	@RequestMapping(value="memberUpdate", method=RequestMethod.POST)
 	public ModelAndView update(MemberDTO memberDTO,HttpSession session, MultipartFile file) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("fname : "+memberDTO.getFname());
-		System.out.println("oname : "+memberDTO.getOname());
 		int result = memberService.memberUpdate(memberDTO,session,file);
+		
+		String message = "Update Fail";
 		
 		if(result>0){
 			session.setAttribute("member", memberDTO);
-			mv.addObject("message", "Update Success");
-		}else {
-			mv.addObject("message", "Update Fail");
+			message="Update Success";
 		}
 		
-		mv.addObject("path", "../");
+		mv.addObject("message", message);
+		mv.addObject("path", "./memberView");
 		mv.setViewName("common/result");
 		
 		return mv;
-	}
-	
+	}	
 	
 	
 	
@@ -144,7 +142,7 @@ public class MemberController {
 		}
 		
 		rd.addFlashAttribute("message", message);
-		return "home";
+		return "redirect:../";
 	}
 		
 }

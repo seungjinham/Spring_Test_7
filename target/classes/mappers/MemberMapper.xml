@@ -19,17 +19,19 @@
   		</select>  		
   		
   		<update id="memberUpdate" parameterType="MemberDTO">
-  			update member
-  			set
+  			update member 
+  			<trim prefix="SET" suffixOverrides=",">
   			pw=#{pw},
   			name=#{name},
   			email=#{email},
   			phone=#{phone},
   			age=#{age},
   			job=#{job},
-  			fname=#{fname},
-  			oname=#{oname}  			
-
+			<if test="fname!=null">
+				fname=#{fname},
+				oname=#{oname}
+			</if>
+			</trim>
   			where id=#{id}
   		</update>  		
   		
