@@ -25,7 +25,7 @@ public class QnaDAO implements BoardDAO {
 	public BoardDTO selectOne(int num) throws Exception {
 		return sqlsession.selectOne(NAMESPACE+"selectOne", num);
 	}
-
+	
 	@Override
 	public int insert(BoardDTO boardDTO) throws Exception {
 		return sqlsession.insert(NAMESPACE+"insert", boardDTO);

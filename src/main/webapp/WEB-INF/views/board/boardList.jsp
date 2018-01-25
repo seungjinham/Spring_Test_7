@@ -56,12 +56,14 @@
 			<tr>
 				<td>${dto.num}</td>
 				<td>
-					<c:catch>
-						<c:forEach begin="1" end="${dto.depth}" var="i">
-							-
-						</c:forEach>
-					</c:catch>
-					${dto.title}
+					<a href="./${board}View?num=${dto.num}">
+						<c:catch>
+							<c:forEach begin="1" end="${dto.depth}" var="i">
+								-
+							</c:forEach>
+						</c:catch>
+						${dto.title}
+					</a>
 				</td>
 				<td>${dto.writer}</td>
 				<td>${dto.reg_date}</td>

@@ -3,11 +3,13 @@ package com.iu.s7;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,6 +24,44 @@ public class QnaController {
 	
 	@Inject
 	private QnaService qnaService;
+	
+	@RequestMapping(value="qnaUpdate", method=RequestMethod.GET)
+	public ModelAndView update(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		BoardDTO boardDTO=qnaService.selectOne(num);
+		
+		mv.addObject("view", boardDTO);
+		mv.addObject("board", "qna");
+		mv.setViewName("board/boardUpdate");
+		return mv;
+	}
+	
+	@RequestMapping(value="qnaUpdate", method=RequestMethod.POST)
+	public String update(QnaDTO qnaDTO, MultipartFile file[], HttpSession session) throws Exception{
+		qnaService.update(qnaDTO,file,session);
+		
+		return "redirect:./qnaList";
+	}
+	
+	@RequestMapping(value="qnaDelete", method=RequestMethod.GET)
+	public String delete(Model model,int num, HttpSession session) throws Exception{
+		qnaService.delete(num, session);
+		return "redirect:./qnaList";
+	}	
+	
+	@RequestMapping(value="qnaView")
+	public ModelAndView selectOne(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		BoardDTO boardDTO=qnaService.selectOne(num);
+		
+		mv.addObject("board", "qna");
+		mv.addObject("view", boardDTO);
+		mv.setViewName("board/boardView");
+		
+		return mv;
+	}
 	
 	@RequestMapping(value="qnaList")
 	public ModelAndView selectList(ListData listData) throws Exception{
@@ -43,8 +83,8 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="qnaWrite", method=RequestMethod.POST)
-	public String insert(QnaDTO qnaDTO, RedirectAttributes re) throws Exception{
-		int result=qnaService.insert(qnaDTO);
+	public String insert(QnaDTO qnaDTO, MultipartFile [] file, HttpSession session, RedirectAttributes re) throws Exception{
+		int result=qnaService.insert(qnaDTO, file, session);
 		String message="Write Fail";
 		if(result>0){
 			message="Write Success";
@@ -53,5 +93,4 @@ public class QnaController {
 		re.addFlashAttribute("message", message);
 		return "redirect:./qnaList";
 	}
-
 }
